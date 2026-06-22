@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>Dudulabs Dev | Creative Developer Portfolio</title>
+  <meta name="description" content="Dudulabs Dev의 세련되고 인터랙티브한 개인 포트폴리오 웹사이트입니다. 멋진 디자인과 혁신적인 프로젝트를 만나보세요.">
+  <meta name="keywords" content="dudulabs-dev, dudulabs, portfolio, web developer, frontend, developer, creative coding">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Dudulabs Dev | Creative Developer Portfolio">
+  <meta property="og:description" content="Dudulabs Dev의 세련되고 인터랙티브한 개인 포트폴리오 웹사이트입니다.">
+  <meta property="og:type" content="website">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="index.css">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       Header / Navigation
+       ========================================== -->
+  <header id="main-header">
+    <div class="container">
+      <a href="#hero" class="logo" id="header-logo">
+        Dudulabs<span class="logo-dot"></span>
+      </a>
+      
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="#hero" class="active nav-link" id="nav-home">Home</a></li>
+          <li><a href="#projects" class="nav-link" id="nav-projects-tab">Projects</a></li>
+          <li><a href="#skills" class="nav-link" id="nav-skills-tab">Skills</a></li>
+          <li><a href="#contact" class="nav-link" id="nav-contact-tab">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       Hero Section
+       ========================================== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-wrapper">
+        <div class="hero-content">
+          <span class="hero-tag">Welcome to my space</span>
+          <h1 class="hero-title" id="main-title">
+            Creative Ideas,
+            <span id="dynamic-typing">Elegant Solutions.</span>
+          </h1>
+          <p class="hero-desc">
+            세상을 변화시키는 코드를 작성하고, 직관적이며 몰입감 넘치는 디지털 경험을 디자인합니다. Dudulabs Dev는 단순한 웹 페이지가 아닌 예술적인 솔루션을 만듭니다.
+          </p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary" id="view-projects-btn">View My Work</a>
+            <a href="#contact" class="btn btn-secondary" id="contact-me-btn">Get In Touch</a>
+          </div>
+        </div>
+        
+        <div class="hero-visual">
+          <div class="visual-canvas">
+            <div class="glowing-sphere"></div>
+            <div class="profile-card glass-panel" id="main-profile-card">
+              <!-- 아바타 이미지 플레이스홀더를 대체할 예쁜 CSS 그래픽 혹은 임시 아바타 적용 -->
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" alt="Dudulabs Profile Image" class="profile-card-image" id="profile-img">
+              <div class="profile-card-info">
+                <h3>Dudulabs Dev</h3>
+                <p>Creative Software Engineer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Projects Section
+       ========================================== -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title reveal">Featured Projects</h2>
+      
+      <!-- JavaScript를 통해 GitHub API로 이 영역을 로드합니다. 로딩 상태를 기본으로 표시합니다. -->
+      <div class="projects-grid" id="github-projects-grid">
+        <div class="project-card glass-panel reveal" style="align-items: center; justify-content: center; min-height: 250px;">
+          <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--accent-cyan);"></i>
+          <p style="margin-top: 1rem; color: var(--text-secondary);">Loading amazing projects...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Skills Section
+       ========================================== -->
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title reveal">Technical Skills</h2>
+      
+      <div class="skills-grid">
+        <!-- Skill 1 -->
+        <div class="skill-card glass-panel reveal" id="skill-frontend">
+          <div class="skill-icon"><i class="fa-brands fa-react"></i></div>
+          <h3 class="skill-name">Frontend Architecture</h3>
+          <div class="skill-bar-wrapper">
+            <div class="skill-bar" data-level="90%"></div>
+          </div>
+          <p class="skill-desc">React, Vue.js, Vite & Next.js</p>
+        </div>
+        
+        <!-- Skill 2 -->
+        <div class="skill-card glass-panel reveal" id="skill-backend">
+          <div class="skill-icon"><i class="fa-brands fa-node-js"></i></div>
+          <h3 class="skill-name">Backend Development</h3>
+          <div class="skill-bar-wrapper">
+            <div class="skill-bar" data-level="85%"></div>
+          </div>
+          <p class="skill-desc">Node.js, Express & Databases</p>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="skill-card glass-panel reveal" id="skill-design">
+          <div class="skill-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <h3 class="skill-name">UI/UX Design</h3>
+          <div class="skill-bar-wrapper">
+            <div class="skill-bar" data-level="80%"></div>
+          </div>
+          <p class="skill-desc">Figma, Interactive Systems, CSS Art</p>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="skill-card glass-panel reveal" id="skill-devops">
+          <div class="skill-icon"><i class="fa-brands fa-docker"></i></div>
+          <h3 class="skill-name">DevOps & Tooling</h3>
+          <div class="skill-bar-wrapper">
+            <div class="skill-bar" data-level="75%"></div>
+          </div>
+          <p class="skill-desc">Docker, Git & CI/CD Pipelines</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Contact Section
+       ========================================== -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title reveal">Let's Connect</h2>
+      
+      <div class="contact-wrapper reveal">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div class="contact-intro">
+            <h3>프로젝트에 대해 이야기해 보아요</h3>
+            <p>참신한 아이디어가 있거나 협업 프로젝트를 계획 중이시라면 편하게 연락해 주세요. 메일을 보내주시거나 소셜 미디어를 통해 언제든 대화할 수 있습니다.</p>
+          </div>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="contact-icon"><i class="fa-regular fa-envelope"></i></div>
+              <div class="contact-details">
+                <h4>Email</h4>
+                <p>dudulabs.dev@gmail.com</p>
+              </div>
+            </div>
+            
+            <div class="contact-method">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="contact-details">
+                <h4>Location</h4>
+                <p>Seoul, South Korea</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="social-links">
+            <a href="https://github.com/dudulabs-dev" target="_blank" class="social-icon" id="github-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" class="social-icon" id="twitter-link" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" class="social-icon" id="linkedin-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <form class="contact-form glass-panel" id="contact-form" onsubmit="event.preventDefault(); alert('메시지가 성공적으로 전송되었습니다! (데모)');">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required placeholder="이름을 입력해 주세요">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="이메일 주소를 입력해 주세요">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" required placeholder="메시지를 입력해 주세요"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="form-submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       Footer
+       ========================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-logo">
+        Dudulabs<span class="logo-dot"></span>
+      </div>
+      <p>&copy; 2026 Dudulabs Dev. All Rights Reserved. Designed with passion.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
