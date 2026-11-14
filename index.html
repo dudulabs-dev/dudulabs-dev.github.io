@@ -3,36 +3,56 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>dudulabs — small, honest iPhone apps</title>
-<meta name="description" content="Independent iPhone apps by dudulabs. No ads, no tracking, your data stays on your device.">
-<link rel="icon" href="assets/apps/daycount.png">
+<title>dudulabs</title>
+<meta name="description" content="Everyday iPhone apps by dudulabs. No sign-up, no ads, your data stays on your iPhone.">
 <link rel="stylesheet" href="style.css">
 <script>(function(){var s=localStorage.getItem('lang');var l=s||((navigator.language||'en').toLowerCase().indexOf('ko')===0?'ko':'en');document.documentElement.setAttribute('data-lang',l);window.toggleLang=function(){var n=document.documentElement.getAttribute('data-lang')==='ko'?'en':'ko';document.documentElement.setAttribute('data-lang',n);localStorage.setItem('lang',n)}})()</script>
 </head>
 <body>
-<header><div class="wrap">
-<a class="logo" href="index.html">dudulabs<b>.</b></a>
-<nav><a href="index.html#apps"><span lang="en">Apps</span><span lang="ko">앱</span></a><a href="index.html#contact"><span lang="en">Contact</span><span lang="ko">문의</span></a><button class="lang" onclick="toggleLang()"><span lang="en">한국어</span><span lang="ko">English</span></button></nav>
-</div></header>
-<main class="wrap">
-<div class="hero">
-<h1><span lang="en">Small, honest<br>iPhone apps.</span><span lang="ko">작고 정직한<br>아이폰 앱.</span></h1>
-<p><span lang="en">dudulabs is a one-person studio in Seoul. We make everyday apps that work offline, need no account, and keep your data on your iPhone.</span><span lang="ko">dudulabs는 서울의 1인 앱 스튜디오예요. 로그인 없이, 인터넷 없이도 되고, 내 데이터는 내 아이폰에만 남는 생활 앱을 만들어요.</span></p>
-</div>
-<section id="apps"><h2><span lang="en">Apps</span><span lang="ko">앱</span></h2><div class="grid"><a class="card" href="daycount/"><img src="assets/apps/daycount.png" alt="DayCount icon"><h3><span lang="en">DayCount</span><span lang="ko">데이카운트</span></h3><p><span lang="en">Countdown widgets for the days that matter.</span><span lang="ko">중요한 날을 홈 화면 위젯으로.</span></p><span class="badge"><span lang="en">Coming soon</span><span lang="ko">출시 예정</span></span></a><a class="card" href="photopilot/"><img src="assets/apps/photopilot.png" alt="PhotoPilot icon"><h3><span lang="en">PhotoPilot</span><span lang="ko">포토파일럿</span></h3><p><span lang="en">Take better photos of the people you love.</span><span lang="ko">소중한 사람 사진, 더 잘 찍게.</span></p><span class="badge"><span lang="en">Coming soon</span><span lang="ko">출시 예정</span></span></a><a class="card" href="musclememory/"><img src="assets/apps/musclememory.png" alt="Muscle Memory icon"><h3><span lang="en">Muscle Memory</span><span lang="ko">머슬메모리</span></h3><p><span lang="en">A gym log that tells you what to lift next.</span><span lang="ko">다음에 몇 kg 들지 알려주는 운동 기록.</span></p><span class="badge"><span lang="en">Coming soon</span><span lang="ko">출시 예정</span></span></a></div></section>
-<section><h2><span lang="en">How we build</span><span lang="ko">이렇게 만들어요</span></h2><div class="pr">
-<div><h3><span lang="en">On your device</span><span lang="ko">내 기기 안에서만</span></h3><p><span lang="en">Your entries, photos and workouts never leave your iPhone.</span><span lang="ko">기록·사진·운동 데이터는 아이폰 밖으로 나가지 않아요.</span></p></div>
-<div><h3><span lang="en">No tracking</span><span lang="ko">추적 없음</span></h3><p><span lang="en">No analytics, no ad SDKs, no data collection.</span><span lang="ko">분석 도구, 광고 SDK, 정보 수집이 없어요.</span></p></div>
-<div><h3><span lang="en">No account</span><span lang="ko">가입 없음</span></h3><p><span lang="en">Open the app and start. That's it.</span><span lang="ko">앱을 열면 바로 시작해요.</span></p></div>
-</div></section>
-<section id="contact"><h2><span lang="en">Contact</span><span lang="ko">문의</span></h2>
-<p style="color:var(--sub);margin-bottom:18px"><span lang="en">Questions, bugs or ideas — we read every email.</span><span lang="ko">질문, 버그, 아이디어 모두 메일로 보내주세요. 전부 읽어요.</span></p>
-<a class="btn" href="mailto:dudulabs.dev@gmail.com"><span lang="en">Email us</span><span lang="ko">메일 보내기</span></a>
-<p class="muted" style="margin-top:12px">dudulabs.dev@gmail.com</p></section>
+<nav class="gnav"><div class="in">
+<a class="mark" href="index.html">dudulabs</a>
+<a class="app" href="daycount/">DayCount</a><a class="app" href="photopilot/">PhotoPilot</a><a class="app" href="musclememory/"><span lang="en">Muscle Memory</span><span lang="ko">머슬메모리</span></a>
+<button onclick="toggleLang()"><span lang="en">한국어</span><span lang="ko">English</span></button>
+</div></nav>
+<main>
+<section class="intro">
+<h1>dudulabs</h1>
+<p><span lang="en">Everyday iPhone apps made by one developer in Seoul. No sign-up, no ads, and your data stays on your iPhone.</span><span lang="ko">서울에서 혼자 만드는 아이폰 앱. 가입도 광고도 없고, 데이터는 내 아이폰에만 남아요.</span></p>
+</section>
+
+<section class="tile parch has-shots">
+<h2>DayCount</h2>
+<p class="tag"><span lang="en">Your big days, on your Home Screen.</span><span lang="ko">중요한 날을 홈 화면에.</span></p>
+<div class="links"><a class="more" href="daycount/"><span lang="en">Learn more</span><span lang="ko">자세히 보기</span></a></div>
+<p class="note"><span lang="en">Coming to the App Store</span><span lang="ko">App Store 출시 예정</span></p>
+<div class="shots-wrap"><div class="shots"><img lang="en" src="assets/shots/dc-widgets-en.png" alt="DayCount widgets" loading="lazy"><img lang="ko" src="assets/shots/dc-widgets-ko.png" alt="DayCount widgets" loading="lazy"></div></div>
+</section>
+
+<section class="tile solo">
+<img class="icon" src="assets/apps/photopilot.png" alt="PhotoPilot icon">
+<h2>PhotoPilot</h2>
+<p class="tag"><span lang="en">A camera that tells you where to stand, so the people you love look their best.</span><span lang="ko">어디 서서 어떻게 찍을지 알려주는 카메라. 소중한 사람이 더 예쁘게 나오게.</span></p>
+<div class="links"><a class="more" href="photopilot/"><span lang="en">Learn more</span><span lang="ko">자세히 보기</span></a></div>
+<p class="note"><span lang="en">Coming to the App Store</span><span lang="ko">App Store 출시 예정</span></p>
+</section>
+
+<section class="tile dark has-shots">
+<h2><span lang="en">Muscle Memory</span><span lang="ko">머슬메모리</span></h2>
+<p class="tag"><span lang="en">Log a set in one tap. Know what to lift next time.</span><span lang="ko">한 번 눌러 세트 기록. 다음엔 몇 kg 들지 알려줘요.</span></p>
+<div class="links"><a class="more" href="musclememory/"><span lang="en">Learn more</span><span lang="ko">자세히 보기</span></a></div>
+<p class="note"><span lang="en">Coming to the App Store</span><span lang="ko">App Store 출시 예정</span></p>
+<div class="shots-wrap"><div class="shots"><img src="assets/shots/mm-today.png" alt="Muscle Memory today" loading="lazy"><img src="assets/shots/mm-routines.png" alt="Muscle Memory routines" loading="lazy"></div></div>
+</section>
+
+<section class="text" style="text-align:center">
+<h2><span lang="en">Questions or ideas?</span><span lang="ko">궁금한 점이나 아이디어가 있나요?</span></h2>
+<p style="color:var(--muted)"><span lang="en">We read every email.</span><span lang="ko">보내주신 메일은 모두 읽어요.</span></p>
+<div class="links"><a class="pill" href="mailto:dudulabs.dev@gmail.com"><span lang="en">Email us</span><span lang="ko">메일 보내기</span></a></div>
+</section>
 </main>
-<footer><div class="wrap">
+<footer><div class="in">
 <span>© 2026 dudulabs · duhyun jo</span>
-<span><a href="privacy.html"><span lang="en">Privacy</span><span lang="ko">개인정보처리방침</span></a> · <a href="mailto:dudulabs.dev@gmail.com">dudulabs.dev@gmail.com</a></span>
+<span><a href="privacy.html"><span lang="en">Privacy Policy</span><span lang="ko">개인정보처리방침</span></a><span class="sep">|</span><a href="mailto:dudulabs.dev@gmail.com">dudulabs.dev@gmail.com</a></span>
 </div></footer>
 </body>
 </html>
