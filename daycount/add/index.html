@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>D-Day — DayCount</title>
+<meta name="description" content="Open this D-Day in DayCount.">
+<meta property="og:title" content="DayCount D-Day">
+<meta property="og:description" content="디데이를 받았어요. DayCount에서 열어 추가하세요. · Open it in DayCount to add it.">
+<meta property="og:image" content="https://dudulabs-dev.github.io/assets/shots/dc-widgets-ko.png">
+<link rel="stylesheet" href="../../style.css">
+<style>
+.count{font-size:80px;font-weight:600;letter-spacing:-.03em;line-height:1;margin-top:28px}
+.recv .date{font-size:21px;color:var(--muted);margin-top:12px}
+.recv h1{word-break:keep-all;overflow-wrap:anywhere}
+.recv .fine{max-width:520px;margin:28px auto 0;font-size:14px;color:var(--muted)}
+.recv[data-state=bad] .ok,.recv[data-state=ok] .bad,.recv[data-state=old] .ok,.recv[data-state=old] .bad-only{display:none}
+.recv:not([data-state=old]) .old{display:none}
+@media (max-width:734px){.count{font-size:64px}}
+</style>
+<script>(function(){var s=localStorage.getItem('lang');var l=s||((navigator.language||'en').toLowerCase().indexOf('ko')===0?'ko':'en');document.documentElement.setAttribute('data-lang',l);window.toggleLang=function(){var n=document.documentElement.getAttribute('data-lang')==='ko'?'en':'ko';document.documentElement.setAttribute('data-lang',n);localStorage.setItem('lang',n)}})()</script>
+</head>
+<body>
+<nav class="gnav"><div class="in">
+<a class="mark" href="../../index.html">dudulabs</a>
+<a class="app" href="../">DayCount</a>
+<button onclick="toggleLang()"><span lang="en">한국어</span><span lang="ko">English</span></button>
+</div></nav>
+<main>
+<section class="tile parch solo recv" id="recv" data-state="bad">
+<p class="eyebrow"><span lang="en">A D-Day for you</span><span lang="ko">디데이를 받았어요</span></p>
+<div class="ok">
+<h1 id="title"></h1>
+<p class="count"><span lang="en" id="count-en"></span><span lang="ko" id="count-ko"></span></p>
+<p class="date"><span lang="en" id="date-en"></span><span lang="ko" id="date-ko"></span></p>
+</div>
+<div class="bad">
+<h1 class="bad-only"><span lang="en">This link doesn’t look right</span><span lang="ko">링크가 올바르지 않아요</span></h1>
+<h1 class="old"><span lang="en">Update DayCount to open this link</span><span lang="ko">DayCount를 업데이트해 주세요</span></h1>
+</div>
+<div class="links">
+<a class="pill" href="https://apps.apple.com/app/id6834637942"><span lang="en">Get DayCount on the App Store</span><span lang="ko">App Store에서 받기</span></a>
+<a class="more ok" id="open" href="#"><span lang="en">Open in DayCount</span><span lang="ko">앱에서 열기</span></a>
+</div>
+<p class="fine ok"><span lang="en">Already installed DayCount? Tap the link you received again and it opens in the app, where you can add this D-Day.</span><span lang="ko">앱을 설치한 뒤 받은 링크를 다시 눌러 주세요. 앱에서 이 디데이를 추가할 수 있어요.</span></p>
+<p class="fine"><span lang="en">The title and date live only in this link. Nothing is sent to or stored by dudulabs.</span><span lang="ko">제목과 날짜는 링크 안에만 있어요. dudulabs 서버로 보내지거나 저장되지 않아요.</span></p>
+</section>
+</main>
+<footer><div class="in">
+<span>© 2026 dudulabs</span>
+<span><a href="../privacy.html"><span lang="en">Privacy</span><span lang="ko">개인정보처리방침</span></a></span>
+</div></footer>
+<script>
+(function(){
+  // Same rules as the app (DayCountShareLink.swift). Data is in the #fragment, so it never reaches the server.
+  var MAX_URL = 2048, MAX_TITLE = 60;
+  var THEMES = ['anniversary','exam','travel','birthday','wedding','dueDate','diet','dday100','discharge','custom'];
+  function graphemes(s){ if (window.Intl && Intl.Segmenter) { return Array.from(new Intl.Segmenter().segment(s)).length; } return Array.from(s).length; }
+  function cleanTitle(t){
+    t = t.normalize('NFC')
+      .replace(/[\u0000-\u001F\u007F-\u009F\u2028\u2029]/g, ' ')
+      .replace(/[\u200B\u200C\u200E\u200F\u202A-\u202E\u2066-\u2069\uFEFF]/g, '')
+      .replace(/\s+/g, ' ').trim();
+    var n = graphemes(t);
+    return (n >= 1 && n <= MAX_TITLE) ? t : null;
+  }
+  function parse(hash){
+    if (!hash || location.href.length > MAX_URL) return {err:'bad'};
+    var m = {}, parts = hash.split('&');
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i]; if (!p) continue;
+      var j = p.indexOf('='); if (j < 0) return {err:'bad'};
+      var k, v;
+      try { k = decodeURIComponent(p.slice(0, j)); v = decodeURIComponent(p.slice(j + 1)); } catch (e) { return {err:'bad'}; }
+      if (Object.prototype.hasOwnProperty.call(m, k)) return {err:'bad'};
+      m[k] = v;
+    }
+    if (m.v === undefined) return {err:'bad'};
+    if (m.v !== '1') return {err:'old'};
+    var title = m.t === undefined ? null : cleanTitle(m.t);
+    if (!title) return {err:'bad'};
+    var dm = /^(\d{4})-(\d{2})-(\d{2})$/.exec(m.d || '');
+    if (!dm) return {err:'bad'};
+    var y = +dm[1], mo = +dm[2], d = +dm[3];
+    var probe = new Date(Date.UTC(y, mo - 1, d));
+    if (y < 1900 || y > 2200 || probe.getUTCMonth() !== mo - 1 || probe.getUTCDate() !== d) return {err:'bad'};
+    var mode = m.m, rec = m.r === undefined ? 'n' : m.r, cal = m.c === undefined ? 's' : m.c, s = m.s === undefined ? '0' : m.s;
+    if (['d','u'].indexOf(mode) < 0 || ['n','y','m','w'].indexOf(rec) < 0 || ['s','l'].indexOf(cal) < 0 || ['0','1'].indexOf(s) < 0) return {err:'bad'};
+    var th = THEMES.indexOf(m.th) >= 0 ? m.th : 'custom';
+    return {title:title, y:y, mo:mo, d:d, mode:mode, rec:rec, cal:cal, startDay:s === '1', theme:th};
+  }
+  function labels(x){
+    if (x.cal === 'l') return {ko:'', en:''};   // lunar: date only (the app converts it)
+    var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var target = new Date(x.y, x.mo - 1, x.d);
+    if (x.mode === 'd' && x.rec === 'y') {
+      target = new Date(today.getFullYear(), x.mo - 1, x.d);
+      if (target < today) target = new Date(today.getFullYear() + 1, x.mo - 1, x.d);
+    }
+    var delta = Math.round((target - today) / 86400000);
+    if (x.startDay && delta < 0) return {ko:(-delta + 1) + '일째', en:'Day ' + (-delta + 1)};
+    if (delta === 0) return {ko:'D-Day', en:'Today'};
+    var before = x.mode === 'd' ? delta > 0 : delta >= 0, n = Math.abs(delta);
+    return before ? {ko:'D-' + n, en:n + (n === 1 ? ' day left' : ' days left')} : {ko:'D+' + n, en:n + (n === 1 ? ' day since' : ' days since')};
+  }
+  function dates(x){
+    var lunarKo = x.cal === 'l' ? ' (음력)' : '', lunarEn = x.cal === 'l' ? ' (Lunar)' : '';
+    var en = new Date(Date.UTC(x.y, x.mo - 1, x.d)).toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric', timeZone:'UTC'});
+    return {ko:x.y + '년 ' + x.mo + '월 ' + x.d + '일' + lunarKo, en:en + lunarEn};
+  }
+  var hash = location.hash.replace(/^#/, '');
+  var r = parse(hash), box = document.getElementById('recv');
+  if (r.err) { box.setAttribute('data-state', r.err); return; }
+  document.getElementById('title').textContent = r.title;
+  var l = labels(r), dt = dates(r);
+  document.getElementById('count-ko').textContent = l.ko;
+  document.getElementById('count-en').textContent = l.en;
+  document.getElementById('date-ko').textContent = dt.ko;
+  document.getElementById('date-en').textContent = dt.en;
+  document.getElementById('open').href = 'daycount://add#' + hash;
+  document.title = r.title + ' — DayCount';
+  box.setAttribute('data-state', 'ok');
+})();
+</script>
+</body>
+</html>
