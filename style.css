@@ -22,6 +22,8 @@ a{color:var(--action);text-decoration:none}a:hover{text-decoration:underline}
 .more:after{content:" ›"}
 .note{margin-top:12px;font-size:14px;color:var(--muted)}
 .tile.dark .note{color:#86868b}
+.store{display:inline-block;background:#0071e3;color:#fff!important;border-radius:980px;padding:9px 20px;font-size:15px;text-decoration:none}
+.store:hover{background:#0077ed;text-decoration:none}
 .shots{display:flex;justify-content:center;gap:28px;margin-top:48px;margin-bottom:-120px}
 .shots img{width:280px;height:auto;display:block;filter:drop-shadow(0 20px 40px rgba(0,0,0,.18))}
 .tile.dark .shots img{filter:drop-shadow(0 20px 50px rgba(255,255,255,.06))}
