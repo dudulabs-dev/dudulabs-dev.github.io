@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>친구가 보낸 데이카운트 디자인</title>
+<meta name="description" content="A DayCount design from a friend. 친구가 보낸 데이카운트 디자인.">
+<meta property="og:title" content="친구가 보낸 데이카운트 디자인">
+<meta property="og:description" content="A DayCount design from a friend · DayCount에서 열어 내 디데이에 입혀 보세요.">
+<meta property="og:image" content="https://dudulabs-dev.github.io/assets/shots/dc-widgets-ko.png">
+<link rel="stylesheet" href="../../style.css">
+<style>
+.recv h1{word-break:keep-all;overflow-wrap:anywhere}
+.recv .fine{max-width:520px;margin:28px auto 0;font-size:14px;color:var(--muted)}
+.recv .fine+.fine{margin-top:12px}
+.recv[data-state=bad] #open{display:none}
+</style>
+</head>
+<body>
+<nav class="gnav"><div class="in">
+<a class="mark" href="../../index.html">dudulabs</a>
+<a class="app" href="../" id="navapp">DayCount</a>
+</div></nav>
+<main>
+<section class="tile parch solo recv" id="recv" data-state="bad">
+<p class="eyebrow" id="eyebrow"></p>
+<h1 id="title"></h1>
+<p class="tag" id="tag"></p>
+<div class="links">
+<a class="pill" id="store" href="https://apps.apple.com/app/id6834637942"></a>
+<a class="more" id="open" href="#"></a>
+</div>
+<p class="fine" id="fine1"></p>
+<p class="fine" id="fine2"></p>
+</section>
+</main>
+<footer><div class="in">
+<span>© 2026 dudulabs</span>
+<span><a href="../privacy.html" id="privacy"></a></span>
+</div></footer>
+<script>
+(function(){
+  // 8 languages, chosen by navigator.language. Text is only ever set with textContent.
+  // The #fragment is never parsed, decoded or evaluated here: it is only passed on to the app link,
+  // and only when it consists of base64url / key=value characters and the URL is <= 2048 characters.
+  var T = {
+    'ko': {name:'데이카운트', eyebrow:'디자인을 받았어요', title:'친구가 보낸 데이카운트 디자인', tag:'앱에서 열면 내 디데이에 이 디자인을 입혀 볼 수 있어요.', store:'App Store에서 받기', open:'앱에서 열기', fine1:'앱을 설치했다면 받은 링크를 다시 눌러 주세요. 앱에서 열려요.', fine2:'디자인은 이 링크 안에만 있어요. dudulabs 서버로 보내지거나 저장되지 않고, 사진은 들어 있지 않아요.', privacy:'개인정보처리방침'},
+    'en': {name:'DayCount', eyebrow:'A design for you', title:'A DayCount design from a friend', tag:'Open it in DayCount to try this design on your own D-Day.', store:'Get DayCount on the App Store', open:'Open in DayCount', fine1:'Already have DayCount? Tap the link you received again and it opens in the app.', fine2:'The design lives only in this link. Nothing is sent to or stored by dudulabs, and no photos are included.', privacy:'Privacy Policy'},
+    'ja': {name:'DayCount', eyebrow:'デザインが届きました', title:'友だちから届いたDayCountのデザイン', tag:'アプリで開くと、自分のDデイにこのデザインを使えます。', store:'App Storeで入手', open:'アプリで開く', fine1:'アプリをインストール済みなら、届いたリンクをもう一度タップしてください。アプリで開きます。', fine2:'デザインはこのリンクの中にだけあります。dudulabsのサーバーに送信・保存されることはなく、写真も含まれません。', privacy:'プライバシーポリシー'},
+    'zh-Hant': {name:'DayCount', eyebrow:'你收到了一個設計', title:'朋友傳來的 DayCount 設計', tag:'用 App 開啟，就能把這個設計套用到自己的倒數日。', store:'在 App Store 下載', open:'在 App 中開啟', fine1:'已安裝 App 的話，請再點一次收到的連結，就會在 App 中開啟。', fine2:'設計只存在於這個連結中，不會傳送或儲存到 dudulabs 的伺服器，也不包含照片。', privacy:'隱私權政策'},
+    'es': {name:'DayCount', eyebrow:'Un diseño para ti', title:'Un diseño de DayCount de un amigo', tag:'Ábrelo en DayCount para probar este diseño en tu propio D-day.', store:'Descargar en el App Store', open:'Abrir en DayCount', fine1:'¿Ya tienes DayCount? Vuelve a tocar el enlace que recibiste y se abrirá en la app.', fine2:'El diseño solo está en este enlace. dudulabs no recibe ni guarda nada, y no incluye fotos.', privacy:'Política de privacidad'},
+    'fr': {name:'DayCount', eyebrow:'Un design pour toi', title:'Un design DayCount envoyé par un ami', tag:'Ouvre-le dans DayCount pour l’essayer sur ton propre D-day.', store:'Télécharger sur l’App Store', open:'Ouvrir dans DayCount', fine1:'Tu as déjà DayCount ? Touche à nouveau le lien reçu : il s’ouvre dans l’app.', fine2:'Le design n’existe que dans ce lien. dudulabs ne reçoit ni ne conserve rien, et aucune photo n’est incluse.', privacy:'Politique de confidentialité'},
+    'de': {name:'DayCount', eyebrow:'Ein Design für dich', title:'Ein DayCount-Design von einem Freund', tag:'Öffne es in DayCount, um das Design bei deinem eigenen Tag auszuprobieren.', store:'Im App Store laden', open:'In DayCount öffnen', fine1:'Du hast DayCount schon? Tippe den erhaltenen Link noch einmal an, dann öffnet er sich in der App.', fine2:'Das Design steckt nur in diesem Link. dudulabs erhält und speichert nichts, und es sind keine Fotos enthalten.', privacy:'Datenschutzerklärung'},
+    'pt-BR': {name:'DayCount', eyebrow:'Um design para você', title:'Um design do DayCount enviado por um amigo', tag:'Abra no DayCount para testar este design no seu próprio D-day.', store:'Baixar na App Store', open:'Abrir no DayCount', fine1:'Já tem o DayCount? Toque de novo no link que você recebeu e ele abre no app.', fine2:'O design existe só neste link. A dudulabs não recebe nem guarda nada, e não há fotos incluídas.', privacy:'Política de Privacidade'}
+  };
+  function pick(){
+    var n = (navigator.language || 'en').toLowerCase();
+    if (n.indexOf('ko') === 0) return 'ko';
+    if (n.indexOf('ja') === 0) return 'ja';
+    if (n.indexOf('zh') === 0) return 'zh-Hant';
+    if (n.indexOf('es') === 0) return 'es';
+    if (n.indexOf('fr') === 0) return 'fr';
+    if (n.indexOf('de') === 0) return 'de';
+    if (n.indexOf('pt') === 0) return 'pt-BR';
+    return 'en';
+  }
+  var lang = pick(), s = T[lang];
+  document.documentElement.setAttribute('lang', lang);
+  document.title = s.title;
+  var ids = {eyebrow:'eyebrow', title:'title', tag:'tag', store:'store', open:'open', fine1:'fine1', fine2:'fine2', privacy:'privacy', name:'navapp'};
+  for (var k in ids) { document.getElementById(ids[k]).textContent = s[k]; }
+
+  // Hash passthrough: base64url characters plus the '=' and '&' separators only; hidden when the URL is longer than 2048.
+  var hash = location.hash.replace(/^#/, '');
+  var box = document.getElementById('recv');
+  var ok = hash.length > 0 && location.href.length <= 2048 && /^[A-Za-z0-9_\-=&]+$/.test(hash);
+  if (ok) {
+    document.getElementById('open').href = 'daycount://design#' + hash;
+    box.setAttribute('data-state', 'ok');
+  }
+})();
+</script>
+</body>
+</html>

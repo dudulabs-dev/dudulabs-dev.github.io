@@ -5,7 +5,9 @@
         "appIDs": ["V2HU4HJ89B.com.dudulabs.daycount"],
         "components": [
           { "/": "/daycount/add", "comment": "DayCount shared D-Day link" },
-          { "/": "/daycount/add/*", "comment": "DayCount shared D-Day link" }
+          { "/": "/daycount/add/*", "comment": "DayCount shared D-Day link" },
+          { "/": "/daycount/design", "comment": "DayCount shared design link" },
+          { "/": "/daycount/design/*", "comment": "DayCount shared design link" }
         ]
       }
     ]
