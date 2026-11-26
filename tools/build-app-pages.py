@@ -6,15 +6,13 @@ Edit the content here, run `python3 tools/build-app-pages.py`, review the diff, 
 
 RULES
 - Only list what is LIVE on the App Store. Check first:
-    curl -s "https://itunes.apple.com/lookup?id=6834637942&country=kr"   # DayCount     -> 1.5 (2026-11-24)
+    curl -s "https://itunes.apple.com/lookup?id=6834637942&country=kr"   # DayCount     -> 1.7 (2026-11-26)
     curl -s "https://itunes.apple.com/lookup?id=6834974384&country=kr"   # Muscle Memory -> 1.1 (2026-11-23)
-- Unreleased work (DayCount 1.6 calendar, 1.7 decorate; Muscle Memory 1.2 chart) lives in NEXT_* below and is only
-  written to daycount/next-1.7.html (noindex, not linked) with `--next`. When 1.7 is on sale, move those items into
-  DAYCOUNT_BANDS / DAYCOUNT_FAQ, rerun, and delete next-1.7.html.
+- Work that is not on sale yet (e.g. Muscle Memory 1.2 chart) must NOT be added here. Keep drafts outside this repo
+  (the 1.7 draft lived in day-count-deco/docs/site-next/) and move them into the lists when the version is READY_FOR_SALE.
 - No location / residence wording. No emoji. See DESIGN.md.
 """
 import html
-import sys
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
@@ -36,6 +34,24 @@ def img_pair(name, alt_en, alt_ko, folder="features", lazy=True, w=600, h=1253, 
 # band = dict(id, title(en,ko), lead(en,ko), items[(en_head, ko_head, en_line, ko_line)], img=(name, alt_en, alt_ko, h) | None)
 
 DAYCOUNT_BANDS = [
+    dict(id="decorate", title=("Decorate your cards", "카드를 꾸며요"),
+         lead=("Backgrounds, stickers, text and effects, on the card and on the widget.", "디데이 카드와 위젯을 내 마음대로 꾸며요."),
+         img=("dc-deco-home", "DayCount list with decorated cards: a pink 100 days card, a Christmas D-30 card and a New Year party card", "분홍 100일째 카드, 크리스마스 D-30 카드, 연말 파티 카드 등 꾸민 카드가 보이는 데이카운트 목록", 1253),
+         items=[
+             ("Decorate", "꾸미기", "In Decorate on the detail screen, add backgrounds, stickers, text, drawings, effects and filters, then drag, pinch and rotate.", "상세 화면의 ‘꾸미기’에서 배경·스티커·글자·손그림·효과·필터를 얹고, 손가락으로 옮기고 키우고 돌려요."),
+             ("On the widget too", "위젯에도 그대로", "A decorated D-Day shows the same design on your Home Screen widget, and the count stays up to date.", "꾸민 디데이는 홈 화면 위젯에도 같은 모습으로 나오고, 숫자는 오늘 기준으로 바뀌어요."),
+             ("Your own stickers", "나만의 스티커", "Lift a person or object out of a photo to make a sticker. Photos are processed only on your device.", "사진에서 사람이나 물건만 오려 나만의 스티커로 만들어요. 사진은 기기 안에서만 처리돼요."),
+             ("Undo, redo and drafts", "되돌리기와 임시 저장", "Step back and forward through your edits. Leave halfway and DayCount offers to pick up where you left off.", "편집을 한 단계씩 되돌리고 다시 해요. 중간에 나가도 이어서 할 수 있어요."),
+         ]),
+    dict(id="christmas", title=("Christmas stickers and effects", "크리스마스 스티커와 효과"),
+         lead=("A Christmas pack for the season, ready in one tap.", "연말 분위기를 한 번에 입혀요."),
+         img=("dc-deco-editor", "Decorate editor with a Christmas sticker, snow and a toolbar", "크리스마스 스티커와 눈 효과, 도구 막대가 있는 꾸미기 화면", 1253),
+         items=[
+             ("14 Christmas stickers", "크리스마스 스티커 14개", "A wreath, a tree, a candy cane, snowflakes, gifts and more.", "리스, 트리, 지팡이 사탕, 눈 결정, 선물 상자 등이 있어요."),
+             ("Effects", "효과", "Snow, twinkling lights, confetti, hearts and fireworks. They keep moving in the app, in a GIF and in a video.", "눈·반짝이 전구·색종이·하트·불꽃 효과. 앱에서도, GIF와 영상에서도 계속 움직여요."),
+             ("8 one-tap templates", "한 번에 입히는 템플릿 8개", "Start from a ready-made look and change anything you like.", "만들어 둔 모습으로 시작해서 마음에 드는 대로 바꿔요."),
+             ("Milestone cards", "기념일 카드", "On day 100, anniversaries, D-30, the day itself and birthdays, a decorated share card is already prepared. Tap the reminder to open it.", "100일째·주년·D-30·D-Day·생일에는 꾸민 공유 카드가 미리 준비돼요. 알림을 누르면 바로 열려요."),
+         ]),
     dict(id="widgets", title=("Widgets and a tidy list", "위젯, 그리고 깔끔한 목록"),
          lead=("See every big day without opening the app.", "앱을 열지 않아도 중요한 날이 보여요."),
          img=("dc-home", "DayCount list with theme filters, favorites and D-Day counts", "테마 필터, 즐겨찾기, 디데이 목록이 보이는 데이카운트 홈 화면", 1253),
@@ -77,13 +93,22 @@ DAYCOUNT_BANDS = [
              ("Only on your iPhone", "내 아이폰에만", "Notes are never put into shared cards or links.", "기록은 공유 카드나 링크에 들어가지 않아요."),
          ]),
     dict(id="share", title=("Share a D-Day", "디데이 나누기"),
-         lead=("Send it as a card or as a link.", "카드로, 링크로 보내 보세요."),
+         lead=("Send it as an image, a GIF, a video or a link.", "이미지, GIF, 영상, 링크로 보내 보세요."),
          img=None,
          items=[
-             ("Share cards", "카드 공유", "A card that looks like your widget, in square or story size, for Messages, Instagram Stories and more.", "위젯 모양 카드를 정사각형이나 스토리 크기로 만들어 카카오톡·인스타그램 스토리·메시지로 보내요."),
+             ("Image, GIF or video", "이미지, GIF, 영상", "Save a card that looks like your widget, decorated or plain, as an image, an animated GIF or a video, in square or story size.", "위젯 모양 카드를 꾸민 그대로 이미지, 움직이는 GIF, 영상으로 저장해요. 정사각형과 스토리 크기가 있어요."),
+             ("Instagram Stories", "인스타그램 스토리", "Send a story-size card straight to Instagram Stories. Use the share sheet for Messages, KakaoTalk and more.", "스토리 크기 카드를 인스타그램 스토리로 바로 보내요. 카카오톡·메시지 등은 공유 시트로 보내요."),
              ("Send as a link", "링크로 보내기", "Your friend taps it and adds the D-Day in one step. Only the title and date are in the link, and nothing is stored anywhere.", "받은 사람이 링크를 누르면 바로 추가돼요. 제목과 날짜만 담기고, 어디에도 저장되지 않아요."),
+             ("Send a design", "디자인 링크", "Share a decoration as a link. Your friend opens it in DayCount and taps Use this design. Your photos, titles and dates are left out.", "꾸민 디자인을 링크로 보내요. 받은 사람이 데이카운트에서 열고 ‘이 디자인 쓰기’를 누르면 적용돼요. 내 사진, 제목, 날짜는 빠져요."),
              ("Celebrations", "기념일 축하", "On Day 100, anniversaries and the day itself, petals fall and you can send a card right away.", "100일째, N주년, 디데이 당일에는 꽃잎과 축하 문구가 나와요. 바로 카드로 보낼 수 있어요."),
              ("A new day", "하루가 지나면", "Open the app on a new day and the count rolls over from yesterday to today.", "앱을 열면 남은 날이 어제에서 오늘로 넘어가는 모습을 보여 줘요."),
+         ]),
+    dict(id="calendar", title=("Add to your Calendar", "캘린더에 추가"),
+         lead=("One tap from the detail screen.", "상세 화면에서 한 번에."),
+         img=None,
+         items=[
+             ("Add to Calendar", "아이폰 캘린더에 추가", "Tap the calendar button at the top of the detail screen to get an all-day event, ready to save.", "상세 화면 위쪽의 캘린더 버튼을 누르면 하루 종일 일정으로 채워져요."),
+             ("Repeats and a reminder", "반복과 하루 전 알림", "Yearly, monthly or weekly repeats and a reminder the day before come along. Lunar D-Days are added once, on the next date.", "매년·매월·매주 반복과 하루 전 알림까지 함께 들어가요. 음력 디데이는 다가오는 날짜로 한 번 추가돼요."),
          ]),
     dict(id="style", title=("Make it yours", "내 취향대로"),
          lead=("Colors, emoji, and an app icon with a face.", "색, 이모지, 그리고 표정이 바뀌는 앱 아이콘."),
@@ -103,6 +128,7 @@ DAYCOUNT_BANDS = [
              ("Backup file", "백업 파일", "Create one in Settings, save it to Files or send it to yourself. Open the file to restore.", "설정에서 만들어 파일 앱에 저장하거나 카카오톡 ‘나와의 채팅’·메일로 보내 두세요. 그 파일을 열면 바로 불러와요."),
              ("A nudge after 30 days", "30일이 지나면 알림", "If 30 days pass without a backup, DayCount reminds you gently in Settings and on the first screen.", "백업한 지 30일이 지나면 설정과 첫 화면에서 가볍게 알려 드려요."),
              ("Safe restore", "안전한 불러오기", "The file is checked first, and your current D-Days are kept as a snapshot before anything is replaced.", "파일을 먼저 확인하고, 바꾸기 전에 지금 디데이를 따로 보관해요."),
+             ("Update notice", "새 버전 안내", "About once a day, DayCount reads its public version number from the App Store and shows a small notice when a new version is out. Nothing personal is sent, and offline nothing happens.", "하루에 한 번 정도 App Store의 공개 버전 번호를 확인해 새 버전이 나오면 작게 알려 드려요. 개인 정보는 보내지 않고, 인터넷이 없으면 아무 일도 없어요."),
              ("No account, no ads", "가입도 광고도 없어요", "No sign-up, no tracking, no ads.", "로그인, 추적, 광고가 없어요."),
          ]),
 ]
@@ -138,6 +164,25 @@ DAYCOUNT_FAQ = [
     ("How do I delete a D-Day?", "디데이는 어떻게 지우나요?",
      "Swipe the D-Day left in the list and tap Delete, then confirm. The confirmation shows which D-Day you are deleting.",
      "목록에서 디데이를 왼쪽으로 밀고 삭제를 누른 뒤 확인하세요. 확인창에 어떤 디데이인지 이름이 나와요."),
+    (
+        "How do I add a D-Day to my Calendar?", "캘린더에는 어떻게 추가하나요?",
+        "Open the D-Day and tap the calendar button at the top. iOS shows a new event already filled in. You choose whether to save it. DayCount does not read your calendar.",
+        "디데이 상세 화면 위쪽의 캘린더 버튼을 누르면 내용이 채워진 새 이벤트 화면이 열려요. 저장할지는 직접 정해요. 데이카운트는 캘린더를 읽지 않아요."),
+    ("How do I decorate a D-Day?", "디데이는 어떻게 꾸미나요?",
+     "Open the D-Day and tap Decorate at the bottom. Pick a background, add stickers, text, drawings, effects or a filter, then tap Save. The design also shows on the Home Screen widget. To start over, reset the decoration from the detail screen menu.",
+     "디데이 상세 화면 아래쪽의 ‘꾸미기’를 누르세요. 배경을 고르고 스티커·글자·손그림·효과·필터를 얹은 뒤 저장을 누르면 돼요. 홈 화면 위젯에도 같은 디자인이 나와요. 처음으로 돌리려면 상세 화면 메뉴에서 꾸미기를 초기화하세요."),
+    ("Are my photos uploaded?", "사진이 업로드되나요?",
+     "No. Photos you use to decorate a D-Day stay on your iPhone and are processed on the device. Design links do not include your photos.",
+     "아니요. 꾸미기에 쓴 사진은 아이폰에만 있고 기기 안에서 처리돼요. 디자인 링크에도 내 사진은 들어가지 않아요."),
+    ("How do I save a card as a GIF or video, or send it to Instagram Stories?", "GIF·영상으로 저장하거나 인스타그램 스토리로 보내려면요?",
+     "Open the D-Day and tap Share, then choose the format. Image, GIF and video can be saved to Photos or sent from the share sheet. Instagram Stories needs the Instagram app; without it, the normal share sheet opens.",
+     "디데이 상세 화면에서 공유를 누르고 형식을 고르세요. 이미지·GIF·영상은 사진에 저장하거나 공유 시트로 보낼 수 있어요. 인스타그램 스토리는 인스타그램 앱이 있어야 하고, 없으면 일반 공유 시트가 열려요."),
+    ("A friend sent me a design link.", "친구가 디자인 링크를 보냈어요.",
+     "Tap the link. With DayCount installed it opens A friend's design, and nothing changes until you tap Use this design. Without the app, the link opens a page with an App Store button.",
+     "링크를 누르면 데이카운트에 ‘친구가 보낸 디자인’이 열리고, ‘이 디자인 쓰기’를 누르기 전에는 아무것도 바뀌지 않아요. 앱이 없으면 App Store 버튼이 있는 페이지가 열려요."),
+    ("What is the “new version available” notice?", "‘새 버전이 있어요’ 안내는 뭔가요?",
+     "About once a day DayCount reads the public version number from the App Store and shows a small notice if a newer version exists. The request holds only the app's App Store ID and your region code. No personal data or D-Day contents are sent.",
+     "하루에 한 번 정도 App Store의 공개 버전 번호를 읽어 새 버전이 있으면 작게 알려 드려요. 앱의 App Store 번호와 지역 코드만 보내고, 개인정보나 디데이 내용은 보내지 않아요."),
 ]
 
 MUSCLEMEMORY_BANDS = [
@@ -212,35 +257,6 @@ MUSCLEMEMORY_FAQ = [
     ("Is my workout history backed up?", "운동 기록이 백업되나요?",
      "Your history is stored only on your iPhone. The app has no backup or sync feature, so deleting the app deletes it.",
      "기록은 아이폰에만 저장돼요. 앱에는 백업이나 동기화 기능이 없어서 앱을 삭제하면 기록도 함께 지워져요."),
-]
-
-# ---- NOT released yet. Only written to daycount/next-1.7.html with --next.  (DayCount 1.6 calendar + 1.7 decorate; see day-count-deco docs/whats-new-1.7.md)
-NEXT_DAYCOUNT_BANDS = [
-    dict(id="decorate", title=("Decorate your cards", "카드를 꾸며요"),
-         lead=("Backgrounds, stickers, text and effects, on the card and on the widget.", "디데이 카드와 위젯을 내 마음대로 꾸며요."),
-         img=("dc-deco-editor", "Decorate editor with a Christmas sticker, snow and a toolbar", "크리스마스 스티커와 눈 효과, 도구 막대가 있는 꾸미기 화면", 1253), folder="features/next",
-         items=[
-             ("Decorate", "꾸미기", "In Decorate on the detail screen, add backgrounds, stickers, text, drawings, effects and filters, then drag, pinch and rotate.", "상세 화면의 ‘꾸미기’에서 배경·스티커·글자·손그림·효과·필터를 얹고, 손가락으로 옮기고 키우고 돌려요."),
-             ("Christmas stickers and effects", "크리스마스 스티커와 효과", "14 Christmas stickers, snow, twinkling lights, confetti, hearts and fireworks, and 8 one-tap templates.", "크리스마스 스티커 14개, 눈·반짝이 전구·색종이·하트·불꽃 효과, 한 번에 입히는 템플릿 8개."),
-             ("Your own stickers", "나만의 스티커", "Lift a person or object out of a photo to make a sticker. Photos are processed only on your device.", "사진에서 사람이나 물건만 오려 나만의 스티커로 만들어요. 사진은 기기 안에서만 처리돼요."),
-             ("Save and send", "저장하고 보내기", "Save the card as an image, an animated GIF or a video, or send it to Instagram Stories or from the share sheet. Send a design to a friend with a link; your photos are left out.", "꾸민 카드는 이미지·움직이는 GIF·영상으로 저장하고, 인스타그램 스토리나 공유 시트로 보내요. 디자인은 링크로 친구에게 보낼 수 있어요(내 사진은 빠져요)."),
-             ("Ready on the big day", "특별한 날엔 미리 준비돼요", "On day 100, anniversaries, D-30, the day itself and birthdays, a decorated share card is already prepared. Tap the reminder to open it.", "100일째·주년·D-30·D-Day·생일에는 꾸민 공유 카드가 미리 준비돼요. 알림을 누르면 바로 열려요."),
-         ]),
-    dict(id="calendar", title=("Add to your Calendar", "캘린더에 추가"),
-         lead=("One tap from the detail screen.", "상세 화면에서 한 번에."),
-         img=None,
-         items=[
-             ("Add to Calendar", "아이폰 캘린더에 추가", "Tap the calendar button at the top of the detail screen to get an all-day event, ready to save.", "상세 화면 위쪽의 캘린더 버튼을 누르면 하루 종일 일정으로 채워져요."),
-             ("Repeats and a reminder", "반복과 하루 전 알림", "Yearly, monthly or weekly repeats and a reminder the day before come along. Lunar D-Days are added once, on the next date.", "매년·매월·매주 반복과 하루 전 알림까지 함께 들어가요. 음력 디데이는 다가오는 날짜로 한 번 추가돼요."),
-         ]),
-]
-NEXT_DAYCOUNT_FAQ = [
-    ("How do I add a D-Day to my Calendar?", "캘린더에는 어떻게 추가하나요?",
-     "Open the D-Day and tap the calendar button at the top. iOS shows a new event already filled in. You choose whether to save it. DayCount does not read your calendar.",
-     "디데이 상세 화면 위쪽의 캘린더 버튼을 누르면 내용이 채워진 새 이벤트 화면이 열려요. 저장할지는 직접 정해요. 데이카운트는 캘린더를 읽지 않아요."),
-    ("Are my photos uploaded?", "사진이 업로드되나요?",
-     "No. Photos you use to decorate a D-Day stay on your iPhone and are processed on the device. Design links do not include your photos.",
-     "아니요. 꾸미기에 쓴 사진은 아이폰에만 있고 기기 안에서 처리돼요. 디자인 링크에도 내 사진은 들어가지 않아요."),
 ]
 
 # ---------------------------------------------------------------- page chrome
@@ -350,13 +366,6 @@ def main():
     (SITE / "daycount/index.html").write_text(page(DAYCOUNT, DAYCOUNT_BANDS, DAYCOUNT_FAQ), encoding="utf-8")
     (SITE / "musclememory/index.html").write_text(page(MUSCLEMEMORY, MUSCLEMEMORY_BANDS, MUSCLEMEMORY_FAQ), encoding="utf-8")
     print("wrote daycount/index.html, musclememory/index.html")
-    if "--next" in sys.argv:
-        # 1.7 draft: decorate band goes first, calendar band after share. noindex, not linked from anywhere.
-        bands = [NEXT_DAYCOUNT_BANDS[0]] + DAYCOUNT_BANDS[:5] + [NEXT_DAYCOUNT_BANDS[1]] + DAYCOUNT_BANDS[5:]
-        t = dict(DAYCOUNT, title="DayCount 1.7 draft — dudulabs")
-        (SITE / "daycount/next-1.7.html").write_text(
-            page(t, bands, DAYCOUNT_FAQ + NEXT_DAYCOUNT_FAQ, robots='<meta name="robots" content="noindex,nofollow">\n'), encoding="utf-8")
-        print("wrote daycount/next-1.7.html (draft)")
 
 
 if __name__ == "__main__":

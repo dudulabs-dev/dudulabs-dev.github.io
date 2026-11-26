@@ -5,8 +5,7 @@ Crops the app screen out of the store screenshot (drops the headline, background
 rounds the top corners, resizes to 600px wide and writes transparent WebP into assets/features/.
 The bottom edge is cut on purpose: the page lets the phone bleed off the bottom of its band.
 
-Usage: python3 tools/make-feature-images.py [--next]
-  --next also writes the unreleased (1.7) images to assets/features/next/
+Usage: python3 tools/make-feature-images.py
 Needs Pillow and `cwebp` (brew install webp).
 """
 import subprocess
@@ -21,7 +20,7 @@ OUT = SITE / "assets" / "features"
 
 # (store shot dir, screen top-left y). Screen = x 132..1188 (W*0.8 wide inside 22px bezel), see scripts/make-store-shots.py
 DC_V3 = SRC / "day-count/design/store-screenshots/v3"          # live: 1.5 listing
-DC_V4 = SRC / "day-count-deco/design/store-screenshots/v4"     # 1.7, NOT released
+DC_V4 = SRC / "day-count-deco/design/store-screenshots/v4"     # 1.7, live since 2026-11-26
 MM_V1 = SRC / "muscle-memory/design/store-screenshots/v1"      # live: 1.1 listing
 DC_TOP = 662   # frame top 640 + bezel 22
 MM_TOP = 582   # frame top 560 + bezel 22
@@ -39,7 +38,8 @@ RELEASED = [
     (MM_V1, MM_TOP, "mm-rest", "{l}-2-rest.png"),
     (MM_V1, MM_TOP, "mm-history", "{l}-5-history.png"),
 ]
-NEXT = [
+LIVE_17 = [
+    (DC_V4, DC_TOP, "dc-deco-home", "{l}-1-deco-home.png"),
     (DC_V4, DC_TOP, "dc-deco-editor", "{l}-2-deco-editor.png"),
 ]
 
@@ -72,9 +72,7 @@ def write(items, out_dir: Path):
 
 
 def main():
-    write(RELEASED, OUT)
-    if "--next" in sys.argv:
-        write(NEXT, OUT / "next")
+    write(RELEASED + LIVE_17, OUT)
 
 
 if __name__ == "__main__":
