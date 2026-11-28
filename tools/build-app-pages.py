@@ -129,7 +129,7 @@ DAYCOUNT_BANDS = [
              ("A nudge after 30 days", "30일이 지나면 알림", "If 30 days pass without a backup, DayCount reminds you gently in Settings and on the first screen.", "백업한 지 30일이 지나면 설정과 첫 화면에서 가볍게 알려 드려요."),
              ("Safe restore", "안전한 불러오기", "The file is checked first, and your current D-Days are kept as a snapshot before anything is replaced.", "파일을 먼저 확인하고, 바꾸기 전에 지금 디데이를 따로 보관해요."),
              ("Update notice", "새 버전 안내", "About once a day, DayCount reads its public version number from the App Store and shows a small notice when a new version is out. Nothing personal is sent, and offline nothing happens.", "하루에 한 번 정도 App Store의 공개 버전 번호를 확인해 새 버전이 나오면 작게 알려 드려요. 개인 정보는 보내지 않고, 인터넷이 없으면 아무 일도 없어요."),
-             ("No account, no ads", "가입도 광고도 없어요", "No sign-up, no tracking, no ads.", "로그인, 추적, 광고가 없어요."),
+             ("No account needed", "가입 없이 바로", "No sign-up, no tracking. Ads only play when you choose one to unlock a new decoration.", "로그인과 추적은 없어요. 광고는 새 꾸미기를 열 때 원하면 한 편만 봐요."),
          ]),
 ]
 
