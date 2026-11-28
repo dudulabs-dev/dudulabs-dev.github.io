@@ -7,7 +7,7 @@ Edit the content here, run `python3 tools/build-app-pages.py`, review the diff, 
 RULES
 - Only list what is LIVE on the App Store. Check first:
     curl -s "https://itunes.apple.com/lookup?id=6834637942&country=kr"   # DayCount     -> 1.7 (2026-11-26)
-    curl -s "https://itunes.apple.com/lookup?id=6834974384&country=kr"   # Muscle Memory -> 1.1 (2026-11-23)
+    curl -s "https://itunes.apple.com/lookup?id=6834974384&country=kr"   # Muscle Memory -> 1.3 content (build 28; publish with the release)
 - Work that is not on sale yet (e.g. Muscle Memory 1.2 chart) must NOT be added here. Keep drafts outside this repo
   (the 1.7 draft lived in day-count-deco/docs/site-next/) and move them into the lists when the version is READY_FOR_SALE.
 - No location / residence wording. No emoji. See DESIGN.md.
@@ -188,13 +188,41 @@ DAYCOUNT_FAQ = [
 MUSCLEMEMORY_BANDS = [
     dict(id="next-weight", title=("Know what to lift next", "다음에 몇 kg 들지"),
          lead=("It reads your last session and tells you today's weight and reps.", "지난 기록을 보고 오늘 무게와 횟수를 알려줘요."),
-         img=("mm-chart", "Exercise progress chart with weight per session and the next suggested weight", "세션별 무게와 다음 추천 무게가 보이는 종목 성장 차트", 1299),
+         img=("mm-chart", "Bench press chart with the weight of each session and the next suggested weight", "세션별 무게와 다음 추천 무게가 보이는 벤치프레스 차트", 1299),
          items=[
-             ("Progressive overload", "증량 추천", "Hit your target reps on every set and it tells you to go heavier next time.", "모든 세트에서 목표 횟수를 채우면 다음번에 무게를 올리라고 알려줘요."),
+             ("Next weight, filled in", "다음 무게가 미리", "Hit your target reps on every set and the next session starts heavier. The weight is already in the stepper.", "모든 세트에서 목표 횟수를 채우면 다음번엔 무게를 올려 둬요. 스테퍼에 이미 들어가 있어요."),
              ("Learns your steps", "기구마다 다른 증량 단위", "It learns each machine's weight steps from your history. You can also type the weight yourself.", "기록에서 기구마다 다른 증량 단위를 배워요. 무게 칸을 직접 적을 수도 있어요."),
              ("Available weights", "가진 무게 설정", "Only have 12 kg dumbbells? Enter 12. At your top weight it suggests more reps instead.", "덤벨이 12kg뿐이면 12만 적어 두세요. 최고 무게에선 횟수를 늘리라고 알려 줘요."),
-             ("Heavier day, fewer reps", "무게를 올린 날은 횟수를 낮춰서", "On days you go heavier, suggested reps drop to match.", "무게를 올린 날은 횟수를 알맞게 낮춰서 추천해요."),
+             ("New PR, right away", "신기록은 바로", "When a set beats your past best, a New PR line shows up on the spot.", "지난 기록을 넘은 세트는 그 자리에서 ‘신기록’으로 알려 줘요."),
              ("Progress chart", "종목별 성장 차트", "See how every exercise has climbed, session by session.", "종목마다 무게가 얼마나 늘었는지 한눈에 봐요."),
+         ]),
+    dict(id="workout", title=("During the workout", "운동하는 동안"),
+         lead=("One tap per set. The rest timer starts by itself.", "세트를 마치면 버튼 한 번, 휴식 타이머가 바로 시작돼요."),
+         img=("mm-rest", "Rest timer with a large ring and big numbers counting down between sets", "큰 링과 큰 숫자로 세트 사이를 세는 휴식 타이머", 1299),
+         items=[
+             ("Big rest timer", "큰 휴식 타이머", "A ring and big numbers, ±15 seconds, and a notification when the rest is over.", "큰 링과 큰 숫자, ±15초, 끝나면 알림이 와요."),
+             ("Minimize the timer", "타이머 접어 두기", "Fold the timer away to look over your routine. The time left stays in a small bar at the bottom.", "타이머를 접고 루틴을 봐요. 남은 시간은 아래 작은 막대에 보여요."),
+             ("Swap mid-workout", "운동 중 바꾸기", "Just for today if someone is using the machine, or in the routine too if your gym doesn't have it.", "누가 쓰고 있으면 오늘만, 기구가 없으면 루틴에서도 바꿔요."),
+             ("Treadmill log", "러닝머신 기록", "Time, speed and incline, a big stopwatch and estimated calories.", "시간·속도·경사, 큰 스톱워치, 대략 칼로리."),
+             ("Undo the last set", "방금 넣은 세트 취소", "Logged the wrong set? Take it back.", "잘못 넣은 세트는 바로 취소해요."),
+         ]),
+    dict(id="lock-screen", title=("Rest time on the Lock Screen", "잠금화면에 휴식 시간"),
+         lead=("Lock your phone between sets and still see the clock.", "세트 사이에 폰을 잠가도 남은 시간이 보여요."),
+         img=("mm-lock", "Lock Screen showing the Muscle Memory rest timer with the time left and the next set", "남은 시간과 다음 세트가 보이는 잠금화면의 머슬메모리 휴식 타이머", 1299),
+         items=[
+             ("Lock Screen and Dynamic Island", "잠금화면과 Dynamic Island", "The rest timer shows on the Lock Screen and in the Dynamic Island, with the next set underneath.", "휴식 타이머가 잠금화면과 Dynamic Island에 보이고, 아래에 다음 세트가 나와요."),
+             ("When the rest is over", "휴식이 끝나면", "It turns to Rest over, and the notification still comes.", "‘휴식 끝’으로 바뀌고, 알림도 그대로 와요."),
+             ("Your choice", "끄고 켜기", "Turn off Rest Timer on Lock Screen in Settings if you only want the notification.", "알림만 받고 싶으면 설정의 ‘잠금화면에 휴식 타이머’를 꺼요."),
+         ]),
+    dict(id="history", title=("Look back", "돌아보기"),
+         lead=("A month calendar of every workout.", "운동한 날을 한 달 달력으로."),
+         img=("mm-month", "History tab with a month calendar showing the muscle groups trained each day", "날마다 한 부위가 적힌 한 달 달력이 있는 기록 탭", 1299),
+         items=[
+             ("Month calendar", "한 달 달력", "Each day shows the muscle groups you trained. Swipe or tap the arrows to change months.", "날마다 어떤 부위를 했는지 칸에 보여요. 밀거나 화살표로 달을 바꿔요."),
+             ("Tap a day", "날을 누르면", "See that day's exercises and best sets, and open any of them.", "그날 운동한 종목과 최고 세트가 나오고, 눌러서 자세히 봐요."),
+             ("By muscle group", "부위별", "This month's sets for each muscle group. The ones you've done less of come first.", "이번 달 부위마다 세트가 막대로 보여요. 덜 한 부위가 위로 올라와요."),
+             ("History by routine", "루틴별 기록", "Your history is also grouped by routine.", "루틴별로도 기록을 모아 봐요."),
+             ("Muscle report", "부위별 리포트", "4, 8 and 12-week sets per muscle group, and exercises that have stalled.", "4·8·12주 부위별 세트 수와 정체된 종목을 알려 줘요."),
          ]),
     dict(id="plan", title=("Plan your week", "일주일을 계획해요"),
          lead=("Routines by weekday, built for you or by you.", "요일별 루틴을 직접 만들거나 추천받아요."),
@@ -205,33 +233,16 @@ MUSCLEMEMORY_BANDS = [
              ("155 built-in exercises", "종목 155개 기본 목록", "Search with gym slang and the muscle group fills in for you.", "‘사레레’ 같은 줄임말로 찾고 부위도 자동으로 채워져요."),
              ("My Gym", "내 헬스장", "Add the equipment you have once and suggestions use it.", "있는 기구를 한 번 등록하면 추천에 반영돼요."),
              ("Two workouts a day", "하루 두 번 운동", "Add a Part 2, like a treadmill run.", "2부로 러닝머신이나 다른 루틴을 추가해요."),
-             ("Edit freely", "자유롭게 편집", "Change routines and your weekly schedule any time.", "루틴과 요일을 언제든 자유롭게 바꿔요."),
          ]),
-    dict(id="workout", title=("During the workout", "운동하는 동안"),
-         lead=("One tap per set. The timer starts by itself.", "세트를 마치면 버튼 한 번, 타이머가 바로 시작돼요."),
-         img=("mm-rest", "Rest timer with big numbers counting down between sets", "세트 사이를 큰 숫자로 세는 휴식 타이머", 1299),
-         items=[
-             ("Big rest timer", "큰 숫자 휴식 타이머", "Big numbers, and a notification when the rest is over.", "큰 숫자로 보이고, 끝나면 알림이 와요."),
-             ("Swap mid-workout", "운동 중 바꾸기", "Just for today if someone is using the machine, or in the routine too if your gym doesn't have it.", "누가 쓰고 있으면 오늘만, 기구가 없으면 루틴에서도 바꿔요."),
-             ("Treadmill log", "러닝머신 기록", "Time, speed and incline, a big stopwatch and estimated calories.", "시간·속도·경사, 큰 스톱워치, 대략 칼로리."),
-             ("Undo the last set", "방금 넣은 세트 취소", "Logged the wrong set? Take it back.", "잘못 넣은 세트는 바로 취소해요."),
-         ]),
-    dict(id="history", title=("Look back", "돌아보기"),
-         lead=("Every workout is remembered.", "운동은 모두 기억해요."),
-         img=("mm-history", "History tab with a four-week calendar and records for each exercise", "4주 달력과 종목별 기록이 있는 기록 탭", 1299),
-         items=[
-             ("4-week calendar", "4주 달력", "See at a glance which days you trained.", "운동한 날이 한눈에 보여요."),
-             ("History by routine", "루틴별 기록", "Your history is grouped by routine.", "루틴별로 기록이 쌓여요."),
-             ("Muscle report", "부위별 리포트", "Weekly sets for each muscle group, and alerts for groups that have stalled.", "주간 세트 수와 정체된 부위를 알려 줘요."),
-         ]),
-    dict(id="habit", title=("Stay consistent, stay private", "꾸준히, 그리고 안전하게"),
-         lead=("A small nudge when you skip. Nothing leaves your iPhone.", "쉬는 날이 길어지면 살짝 알려줘요. 기록은 아이폰 밖으로 나가지 않아요."),
+    dict(id="habit", title=("Your records, kept by you", "기록은 내가 보관해요"),
+         lead=("No account. Nothing leaves your iPhone unless you save a backup file.", "가입 없이 바로. 백업 파일을 직접 만들지 않으면 아이폰 밖으로 나가지 않아요."),
          img=None,
          items=[
+             ("Backup file", "백업 파일", "Create one in Settings and keep it wherever you like, such as the Files app or a message to yourself. Open the file to restore.", "설정에서 만들어 파일 앱이나 나에게 보내기 등 원하는 곳에 보관하세요. 그 파일을 열면 바로 불러와요."),
              ("Friendly nudges", "근손실 전에 알림", "A reminder when you skip too many days. You can turn it off.", "쉬는 날이 길어지면 알려줘요. 끌 수 있어요."),
-             ("A mascot app icon", "캐릭터 앱 아이콘", "The icon looks worried when you skip more than 3 days.", "3일 넘게 쉬면 걱정하는 얼굴로 바뀌어요."),
+             ("An app icon with moods", "표정이 바뀌는 앱 아이콘", "The icon looks worried when you skip more than 3 days.", "3일 넘게 쉬면 아이콘이 걱정하는 얼굴로 바뀌어요."),
              ("8 languages", "8개 언어", "English, Korean, Japanese, Traditional Chinese, German, Spanish, French and Portuguese.", "한국어·영어·일본어·중국어(번체)·독일어·스페인어·프랑스어·포르투갈어."),
-             ("No account, no ads", "가입도 광고도 없어요", "Your workouts stay on your iPhone. No sign-up, no tracking, no ads.", "모든 기록은 내 아이폰에만 저장돼요. 로그인, 추적, 광고가 없어요."),
+             ("No account, no ads", "가입도 광고도 없어요", "No sign-up, no tracking, no ads.", "로그인, 추적, 광고가 없어요."),
          ]),
 ]
 
@@ -251,12 +262,21 @@ MUSCLEMEMORY_FAQ = [
     ("Can it build a routine for me?", "루틴을 대신 짜 주나요?",
      "Yes. Open the Weekly tab and tap Suggest a routine. Pick your days, session length and split. Add your gym's equipment once in My Gym under Settings. By default it fills empty days only, and days that already have a routine stay as they are.",
      "네. 주간 탭에서 ‘루틴 추천’을 누르고 요일, 운동 시간, 분할을 고르세요. 설정의 ‘내 헬스장’에 있는 기구를 한 번 등록해 두면 돼요. 기본은 빈 요일만 채우고, 이미 루틴이 있는 요일은 그대로 둬요."),
+    ("Can I look at my routine while resting?", "쉬는 동안 루틴을 볼 수 있나요?",
+     "Yes. Tap the arrow at the top left of the rest timer to minimize it. The timer keeps running in a small bar above the tabs. Tap the bar to open the timer again.",
+     "네. 휴식 화면 왼쪽 위 화살표를 누르면 타이머가 접혀요. 타이머는 탭 위 작은 막대에서 계속 돌고, 막대를 누르면 다시 커져요."),
+    ("The rest timer isn't on my Lock Screen.", "잠금화면에 휴식 타이머가 안 보여요.",
+     "Check that Rest Timer on Lock Screen is on in the app's Settings, and that Live Activities are allowed for Muscle Memory in the iOS Settings app.",
+     "앱 설정에서 ‘잠금화면에 휴식 타이머’가 켜져 있는지, iOS 설정 앱에서 머슬메모리의 실시간 현황이 허용돼 있는지 확인해 주세요."),
     ("Why does it ask for notifications?", "왜 알림 권한을 묻나요?",
      "To tell you when your rest timer ends and to nudge you on workout days. You can turn nudges off in Settings. Notifications are created on your iPhone; nothing is sent to a server.",
      "휴식 타이머가 끝났을 때와 운동하는 날 깜빡하지 않게 알려주기 위해서예요. 운동 알림은 설정에서 끌 수 있어요. 알림은 아이폰 안에서 만들어지고 서버로 보내는 건 없어요."),
     ("Is my workout history backed up?", "운동 기록이 백업되나요?",
-     "Your history is stored only on your iPhone. The app has no backup or sync feature, so deleting the app deletes it.",
-     "기록은 아이폰에만 저장돼요. 앱에는 백업이나 동기화 기능이 없어서 앱을 삭제하면 기록도 함께 지워져요."),
+     "Your history is stored only on your iPhone and there is no cloud sync. In Settings you can create a backup file and keep it wherever you like. Without a backup file, deleting the app deletes your history.",
+     "기록은 아이폰에만 저장되고 클라우드 동기화는 없어요. 설정에서 백업 파일을 만들어 원하는 곳에 보관할 수 있어요. 백업 파일이 없으면 앱을 삭제할 때 기록도 함께 지워져요."),
+    ("How do I move my history to a new iPhone?", "새 아이폰으로 옮기려면요?",
+     "Create a backup file in Settings and send it to yourself. On the new iPhone, install Muscle Memory and open the file. The app checks it and asks before replacing anything.",
+     "설정에서 백업 파일을 만들어 나에게 보내 두세요. 새 아이폰에 머슬메모리를 설치하고 그 파일을 열면 돼요. 바꾸기 전에 파일 내용을 보여 주고 물어봐요."),
 ]
 
 # ---------------------------------------------------------------- page chrome
